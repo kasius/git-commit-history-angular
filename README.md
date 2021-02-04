@@ -1,27 +1,50 @@
 # GitCommitHistoryAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.2
 
-## Development server
+## Crossroads-Group Test Project Commit History for X Project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Angular application that allows to list the Commits of a valid public github project.
 
-## Code scaffolding
+Default project: `https://github.com/kasius/git-commit-history-angular`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![Alt text](src/assets/img/project_1.png?raw=true "Title")
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+The application allows you to evaluate and view commits of any public project on GitHub, to evaluate another project you must press the Edit button
 
-## Running unit tests
+![Alt text](src/assets/img/projecto_2.png?raw=true "Title")
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+When pressing the edit button, a form is displayed that allows entering a VALID GitHub user and project name, when entering valid data the last 30 commits of the entered project are listed, additionally it is possible to re-list the GitCommitHistoryAngular project commit
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+you can try entering nrwl in user and nx in project, the result is the following (image)
 
-## Further help
+![Alt text](src/assets/img/project_3.png?raw=true "Title")
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+when entering invalid data, an error is displayed with the possibility of returning to commits of the GitCommitHistoryAngular project
+
+## Used technology
+
+1. Angular
+2. Reactive programming
+3. Container/Presentation Pattern
+4. Bootstrap/Html/Sass
+5. NGRX/Redux
+    - Actions
+    - Reducer
+    - Effects
+    - Selectors
+    - Facade
+
+## Raise project
+
+Run git clone https://github.com/kasius/git-commit-history-angular.git
+
+Access git-commit-history-angular
+
+run: npm install
+
+run: npm run start
+
+The application must be uploaded in your browser at `http://localhost:7777` and you can now interact with the app
