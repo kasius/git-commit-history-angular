@@ -1,8 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { EffectsModule } from '@ngrx/effects';
+import { environment } from '../environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { routerReducer, RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
+import * as fromCommit from './store/commit.reducer';
+import { CommitEffects } from './store/commit.effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -10,7 +19,25 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot(
+      { router: routerReducer },
+      {
+        metaReducers: !environment.production ? [] : [],
+        runtimeChecks: {
+          strictActionImmutability: true,
+          strictStateImmutability: true,
+        },
+      }
+    ),
+    EffectsModule.forRoot([]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
+    EffectsModule.forFeature([CommitEffects]),
+    StoreModule.forFeature(fromCommit.commitFeatureKey, fromCommit.reducerCommits)
   ],
   providers: [],
   bootstrap: [AppComponent]

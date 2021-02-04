@@ -7,119 +7,88 @@
     <p>
       Project under evaluation:
     </p>
-    <a href="https://github.com/kasius/git-commit-history-angular"
-      target="_blank">https://github.com/kasius/git-commit-history-angular</a>
+    <a href="https://github.com/{{(project$ | async).user}}/{{(project$ | async).name}}"
+      target="_blank">https://github.com/{{(project$ | async).user}}/{{(project$ | async).name}}</a>
     &nbsp;
-    <button (click)="statusEditProject = !statusEditProject">
+    <button class="btn btn-sm btn-info" [disabled]="(error$ | async)" (click)="editProject()">
       <em *ngIf="!statusEditProject" title="Change project to evaluate" class="fas fa-edit"></em>
       <em *ngIf="statusEditProject" title="Delete project edit" class="fas fa-minus-circle"></em>
     </button>
 
-    <form *ngIf="statusEditProject" class="form-inline mt-2">
+    <button *ngIf="projectBase.user !== formProject.value.user || projectBase.name !== formProject.value.name" class="ml-2 btn btn-sm btn-success"
+      (click)="changeProject(projectBase);editProject();">
+      <em title="Go back to project Test Git Commit History Crossroads" class="fas fa-retweet"></em>
+    </button>
+
+    <!-- <p>(project$ | async): {{(project$ | async) | json}}</p> -->
+
+    <form [formGroup]="formProject" (ngSubmit)="changeProject(formProject.value)"
+      *ngIf="statusEditProject || (error$ | async)" class="form-inline mt-2">
       <div class="form-group">
         <label for="user" class="mr-2">User</label>
-        <input type="text" class="form-control mr-2" id="user" placeholder="User GitHub">
+        <input type="text" formControlName="user" class="form-control mr-2" [ngClass]="{'is-invalid': (error$ | async)}"
+          id="user" placeholder="User GitHub">
       </div>
       <div class="form-group">
         <label for="project" class="mr-2">Project</label>
-        <input type="text" class="form-control mr-2" id="project" placeholder="Project GitHub">
+        <input type="text" formControlName="name" class="form-control mr-2" [ngClass]="{'is-invalid': (error$ | async)}"
+          id="project" placeholder="Project GitHub">
       </div>
-      <button type="submit" title="Change User GitHub Project" class="btn btn-primary ml-2"><em
-          class="fa fa-save"></em></button>
+      <button [disabled]="!formProject.valid" type="submit" title="Change User GitHub Project"
+        class="btn btn-primary ml-2"><em class="fa fa-save"></em></button>
     </form>
+
+    <div *ngIf="((formProject.controls.user.invalid && (formProject.controls.user.dirty || formProject.controls.user.touched))
+      )" class="text-danger ml-5 mt-1">
+
+      <div *ngIf="formProject.controls.user.errors.required">
+        GitHub user is required.
+      </div>
+    </div>
+
+    <div
+      *ngIf="((formProject.controls.name.invalid && (formProject.controls.name.dirty || formProject.controls.name.touched)))"
+      class="text-danger ml-5 mt-1">
+
+      <div *ngIf="formProject.controls.name.errors.required">
+        Project name is required.
+      </div>
+
+    </div>
 
   </div>
 </section>
 
 <section class="container">
   <!-- <router-outlet></router-outlet> -->
-  <table class="table table-sm table-bordered">
+
+  <div *ngIf="(error$ | async)" class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">Upsss!</h4>
+    <p>You must enter a real <strong> User </strong> and <strong> Project Name </strong> so that we can collect the last
+      commits made, otherwise, if the User / Project tuple is not real, you will see this message.</p>
+    <hr>
+    <p class="mb-0">We recommend that you
+      verify the data entered.</p>
+  </div>
+
+  <table *ngIf="!(error$ | async)" class="table table-sm table-bordered">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col" width="80%">Commit detail</th>
+        <th scope="col">Date</th>
+        <th scope="col">Author</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+      <tr *ngFor="let item of (data$ | async);">
+        <td>{{item.commit.message}}</td>
+        <td>{{item.commit.committer.date | date}}</td>
+        <td>{{item.commit.author.name}}</td>
       </tr>
     </tbody>
   </table>
 
   <hr>
-
-  <table class="table table-sm table-bordered">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-    </tbody>
-  </table>
 
 </section>
 <!-- /container -->
