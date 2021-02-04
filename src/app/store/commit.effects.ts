@@ -13,6 +13,8 @@ export class CommitEffects {
 
   private apiConnect = 'https://api.github.com/repos/';
 
+  // Through effects and depending on the
+  // triggered action, GITHUB API is consumed
 
   // COMMITS
   loadCommits$ = createEffect(() =>

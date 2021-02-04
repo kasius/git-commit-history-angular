@@ -1,6 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { ProjectLigth } from './commit.model';
 
+// Actions to trigger as needed in application
+
 // PROJECT
 export const loadProjectSucess = createAction('[Project] Change Success', props<{ project: ProjectLigth }>()
 );

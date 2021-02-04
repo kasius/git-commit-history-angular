@@ -21,8 +21,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    // Modules needed to work with Reactive forms
     FormsModule,
     ReactiveFormsModule,
+    // We declare what is necessary to work with NGRX and provide our
+    // application with a STORE and a single source of truth
     StoreModule.forRoot(
       { router: routerReducer },
       {

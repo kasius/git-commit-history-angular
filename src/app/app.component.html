@@ -15,13 +15,12 @@
       <em *ngIf="statusEditProject" title="Delete project edit" class="fas fa-minus-circle"></em>
     </button>
 
-    <button *ngIf="projectBase.user !== formProject.value.user || projectBase.name !== formProject.value.name" class="ml-2 btn btn-sm btn-success"
-      (click)="changeProject(projectBase);editProject();">
+    <button *ngIf="projectBase.user !== formProject.value.user || projectBase.name !== formProject.value.name"
+      class="ml-2 btn btn-sm btn-success" (click)="changeProject(projectBase);editProject();">
       <em title="Go back to project Test Git Commit History Crossroads" class="fas fa-retweet"></em>
     </button>
 
-    <!-- <p>(project$ | async): {{(project$ | async) | json}}</p> -->
-
+    <!-- FORM -->
     <form [formGroup]="formProject" (ngSubmit)="changeProject(formProject.value)"
       *ngIf="statusEditProject || (error$ | async)" class="form-inline mt-2">
       <div class="form-group">
@@ -37,7 +36,9 @@
       <button [disabled]="!formProject.valid" type="submit" title="Change User GitHub Project"
         class="btn btn-primary ml-2"><em class="fa fa-save"></em></button>
     </form>
+    <!-- FORM -->
 
+    <!-- VALIDATIONS -->
     <div *ngIf="((formProject.controls.user.invalid && (formProject.controls.user.dirty || formProject.controls.user.touched))
       )" class="text-danger ml-5 mt-1">
 
@@ -45,7 +46,6 @@
         GitHub user is required.
       </div>
     </div>
-
     <div
       *ngIf="((formProject.controls.name.invalid && (formProject.controls.name.dirty || formProject.controls.name.touched)))"
       class="text-danger ml-5 mt-1">
@@ -55,13 +55,14 @@
       </div>
 
     </div>
+    <!-- VALIDATIONS -->
 
   </div>
 </section>
 
 <section class="container">
-  <!-- <router-outlet></router-outlet> -->
 
+  <!-- MESSAGE DATA ERROR -->
   <div *ngIf="(error$ | async)" class="alert alert-danger" role="alert">
     <h4 class="alert-heading">Upsss!</h4>
     <p>You must enter a real <strong> User </strong> and <strong> Project Name </strong> so that we can collect the last
@@ -70,23 +71,32 @@
     <p class="mb-0">We recommend that you
       verify the data entered.</p>
   </div>
+  <!-- MESSAGE DATA ERROR -->
 
+  <!-- TABLE COMMITS -->
   <table *ngIf="!(error$ | async)" class="table table-sm table-bordered">
     <thead>
       <tr>
-        <th scope="col" width="80%">Commit detail</th>
-        <th scope="col">Date</th>
-        <th scope="col">Author</th>
+        <th scope="col" class="d-none d-sm-table-cell" width="70%">Commit detail</th>
+        <th scope="col">Commit Date</th>
+        <th scope="col" class="d-none d-sm-table-cell">Author</th>
+        <th scope="col">Detail</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of (data$ | async);">
-        <td>{{item.commit.message}}</td>
-        <td>{{item.commit.committer.date | date}}</td>
-        <td>{{item.commit.author.name}}</td>
+        <td class="d-none d-sm-table-cell">{{item.commit.message}}</td>
+        <td>{{item.commit.committer.date | date: 'yyyy-MM-dd HH:mm' }}</td>
+        <td class="d-none d-sm-table-cell">{{item.commit.author.name}}</td>
+        <td class="text-center">
+          <a [href]="item.html_url" target="_blank" class="btn btn-sm btn-info">
+            <em class="fa fa-code"></em>
+          </a>
+        </td>
       </tr>
     </tbody>
   </table>
+  <!-- TABLE COMMITS -->
 
   <hr>
 

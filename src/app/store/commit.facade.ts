@@ -5,6 +5,10 @@ import * as commitsActions from './commit.actions';
 import * as commitsSelectors from './commit.selectors';
 import { Project, ProjectLigth } from './commit.model';
 
+// I use a facade to have a black box that
+// is in charge of receiving information and
+// modifying the store through communication with reducer
+
 @Injectable({
   providedIn: 'root'
 })

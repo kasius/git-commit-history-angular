@@ -1,8 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as commitsActions from './commit.actions';
-import { Project } from './commit.model';
 
 export const commitFeatureKey = 'commits';
+
+// I use Reducer as a pure function
+//  in charge of modifying the state
 
 export interface CommitsState {
   project: {
