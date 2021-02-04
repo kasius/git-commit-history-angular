@@ -50,3 +50,12 @@ run: npm install
 run: npm run start
 
 The application must be uploaded in your browser at `http://localhost:7777` and you can now interact with the app
+
+## Next steps
+- Implement Pagination
+- Server Side
+- Graph with visual information of project Commits
+- HTML Separation in Angular Components
+- Implement environment in NX project
+
+ `If you need me to implement these steps, you can tell me to spend more time and implement what is indicated.`
