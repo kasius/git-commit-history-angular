@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
+
+  // declarations
   title = 'git-commit-history-angular';
+  public statusEditProject = false;
 }

@@ -1,31 +1,43 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="#">Practica Angular Avanzado</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
+  <a class="navbar-brand" href="#">Git Commit History Project</a>
 </nav>
-<main role="main">
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3">Bienvenido!</h1>
-      <p>
-        a proyecto Angular Avanzado, en este proyecto podrás ver detalle de
-        regiones continentales, sus países y datos base para cada País!!!...
-      </p>
-    </div>
-  </div>
-
+<section class="jumbotron">
   <div class="container">
-    <!-- Example row of columns -->
-    <router-outlet></router-outlet>
+    <h1 class="display-3">Welcome!</h1>
+    <p>
+      Project under evaluation:
+    </p>
+    <a href="https://github.com/kasius/git-commit-history-angular"
+      target="_blank">https://github.com/kasius/git-commit-history-angular</a>
+    &nbsp;
+    <button (click)="statusEditProject = !statusEditProject">
+      <em *ngIf="!statusEditProject" title="Change project to evaluate" class="fas fa-edit"></em>
+      <em *ngIf="statusEditProject" title="Delete project edit" class="fas fa-minus-circle"></em>
+    </button>
 
-    <hr />
+    <form *ngIf="statusEditProject" class="form-inline mt-2">
+      <div class="form-group">
+        <label for="user" class="mr-2">User</label>
+        <input type="text" class="form-control mr-2" id="user" placeholder="User GitHub">
+      </div>
+      <div class="form-group">
+        <label for="project" class="mr-2">Project</label>
+        <input type="text" class="form-control mr-2" id="project" placeholder="Project GitHub">
+      </div>
+      <button type="submit" title="Change User GitHub Project" class="btn btn-primary ml-2"><em
+          class="fa fa-save"></em></button>
+    </form>
+
   </div>
-  <!-- /container -->
-</main>
+</section>
+
+<section class="container">
+  <!-- Example row of columns -->
+  <router-outlet></router-outlet>
+
+  <hr />
+</section>
+<!-- /container -->
 <footer class="container">
   <p>© Todos los derechos Reservados - Carlos Cifuentes Ulloa 2021</p>
 </footer>
