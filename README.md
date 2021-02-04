@@ -24,6 +24,8 @@ you can try entering nrwl in user and nx in project, the result is the following
 
 when entering invalid data, an error is displayed with the possibility of returning to commits of the GitCommitHistoryAngular project
 
+The API that is consumed is `https://api.github.com/repos/USERGITHUB/PROJECTGITHUB/commits`
+
 ## Used technology
 
 1. Angular
